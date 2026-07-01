@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Park Inn by Radisson Одинцово — Конференц-возможности</title>
+    <style>
+        :root {
+            --bg-main: #051329;       /* Deep Classical Midnight Dark Blue */
+            --bg-sidebar: #020b18;    /* Extra Dark Blue for elegant contrast */
+            --bg-card: #ffffff;       /* Pure White Cards for the classical look */
+            --color-gold: #c5a059;    /* Premium Metallic Gold */
+            --color-gold-hover: #e5c17b;
+            --text-dark: #1e293b;     /* Readable text inside white cards */
+            --text-light: #f8fafc;    /* Readable text on dark backgrounds */
+            --text-muted: #64748b;    /* Secondary slate text */
+            --border-gold: 1px solid #c5a059;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Georgia', 'Times New Roman', Times, serif; 
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar Navigation - Classical Styling */
+        .sidebar {
+            width: 300px;
+            background-color: var(--bg-sidebar);
+            border-right: 2px solid var(--color-gold);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+        }
+
+        .brand {
+            padding: 32px 24px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            text-align: center;
+        }
+
+        .brand h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--color-gold);
+            text-transform: uppercase;
+        }
+
+        .brand span {
+            color: #ffffff;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-top: 6px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 24px 16px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            margin-bottom: 12px;
+        }
+
+        .nav-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid transparent;
+            color: #cbd5e1;
+            padding: 14px 20px;
+            border-radius: 4px;
+            text-align: left;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--color-gold);
+            color: #ffffff;
+            background-color: rgba(197, 160, 89, 0.1);
+        }
+
+        .nav-btn.active {
+            background-color: var(--color-gold) !important;
+            color: var(--bg-sidebar) !important;
+            font-weight: bold;
+            border-color: var(--color-gold);
+            box-shadow: 0 4px 10px rgba(197, 160, 89, 0.3);
+        }
+
+        /* Main Content Container */
+        .main-content {
+            margin-left: 300px;
+            flex-grow: 1;
+            padding: 50px;
+            max-width: 1250px;
+            width: calc(100% - 300px);
+            background: radial-gradient(circle at top right, #092042 0%, #051329 100%);
+        }
+
+        .dashboard-page {
+            display: none; /* Controlled explicitly via JS .style.display */
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--color-gold);
+            padding-bottom: 20px;
+        }
+
+        .page-header h2 {
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--color-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.3;
+        }
+
+        .page-header p {
+            color: #e2e8f0;
+            margin-top: 8px;
+            font-size: 16px;
+            font-style: italic;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-top: 4px solid var(--color-gold);
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 28px;
+            color: var(--text-dark);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            color: #051329;
+            margin-bottom: 14px;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #334155;
+            font-family: sans-serif;
+        }
+
+        .image-box {
+            width: 100%;
+            margin-bottom: 24px;
+            border: 2px solid var(--color-gold);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: #020b18;
+        }
+
+        .image-box img {
+            width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .badge {
+            background-color: #051329;
+            color: var(--color-gold);
+            padding: 4px 12px;
+            border-radius: 2px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--color-gold);
+            text-transform: uppercase;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 40px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            border: 1px solid var(--color-gold);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 15px;
+            background-color: var(--bg-card);
+            color: var(--text-dark);
+        }
+
+        th {
+            background-color: #020b18;
+            color: var(--color-gold);
+            padding: 18px;
+            font-weight: 600;
+            font-family: 'Georgia', serif;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--color-gold);
+        }
+
+        td {
+            padding: 18px;
+            border-bottom: 1px solid #e2e8f0;
+            font-family: sans-serif;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        .subtabs-container {
+            margin-top: 30px;
+        }
+
+        .subtabs-nav {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        .subtab-btn {
+            background-color: transparent;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: #cbd5e1;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Georgia', serif;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .subtab-btn.active {
+            background-color: var(--color-gold) !important;
+            border-color: var(--color-gold) !important;
+            color: var(--bg-sidebar) !important;
+        }
+
+        .subtab-content {
+            display: none;
+            background-color: var(--bg-card);
+            border-radius: 4px;
+            padding: 35px;
+            color: var(--text-dark);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-top: 4px solid var(--color-gold);
+        }
+
+        .menu-section {
+            margin-bottom: 24px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .menu-title {
+            font-weight: 700;
+            color: #051329;
+            margin-bottom: 10px;
+            font-size: 17px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-items {
+            color: #334155;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-left: 20px;
+            font-family: sans-serif;
+        }
+
+        .alert-box {
+            background-color: rgba(197, 160, 89, 0.1);
+            border: 1px solid var(--color-gold);
+            border-left: 5px solid var(--color-gold);
+            padding: 20px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+
+        ul.styled-list {
+            list-style-type: none;
+        }
+        ul.styled-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 15px;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 📱 BULLETPROOF MOBILE RESPONSIVE MEDIA QUERY */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: sticky !important; 
+                top: 0;
+                bottom: auto;
+                left: auto;
+                border-right: none;
+                border-bottom: 2px solid var(--color-gold);
+                height: auto;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+                z-index: 999999 !important; 
+            }
+
+            .brand {
+                padding: 14px 12px 6px 12px;
+                border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+            }
+
+            .brand h1 {
+                font-size: 18px;
+            }
+
+            .brand span {
+                font-size: 11px;
+            }
+
+            .nav-menu {
+                display: flex !important;
+                flex-direction: row !important;
+                overflow-x: auto !important;
+                padding: 10px !important;
+                gap: 8px !important;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch !important; 
+            }
+
+            .nav-item {
+                margin-bottom: 0 !important;
+                flex: 0 0 auto !important;
+            }
+
+            .nav-btn {
+                width: auto !important; 
+                padding: 10px 16px !important;
+                font-size: 13px !important;
+                white-space: nowrap !important;
+                border: 1px solid rgba(197, 160, 89, 0.3) !important;
+                position: relative !important;
+                z-index: 9999999 !important;
+                pointer-events: auto !important;
+                touch-action: manipulation !important;
+                -webkit-tap-highlight-color: transparent !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+                padding: 24px 16px !important;
+                position: relative;
+                z-index: 1; 
+            }
+
+            .page-header {
+                margin-bottom: 24px;
+            }
+
+            .page-header h2 {
+                font-size: 24px;
+            }
+
+            .grid-2, .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-bottom: 24px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .subtabs-nav {
+                padding-bottom: 6px;
+                margin-bottom: 16px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .subtab-btn {
+                padding: 10px 14px !important;
+                font-size: 13px !important;
+                position: relative !important;
+                z-index: 1000 !important;
+                touch-action: manipulation !important;
+                -webkit-tap-highlight-color: transparent !important;
+            }
+
+            .subtab-content {
+                padding: 20px 16px;
+            }
+
+            td, th {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+            
+            .menu-items {
+                margin-left: 10px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="brand">
+            <h1>Park Inn</h1>
+            <span>от Radisson Одинцово</span>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <button class="nav-btn active" onclick="switchPage('page-home', this)">Обзор отеля</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-btn" onclick="switchPage('page-location', this)">Расположение и Карта</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-btn" onclick="switchPage('page-rooms', this)">Номерной фонд</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-btn" onclick="switchPage('page-halls', this)">Конференц-залы</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-btn" onclick="switchPage('page-catering', this)">Кейтеринг и Меню</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-btn" onclick="switchPage('page-options', this)">Доп. опции меню</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div id="page-home" class="dashboard-page" style="display: block;">
+            <div class="page-header">
+                <h2>Конференц-услуги и кейтеринг</h2>
+                <p>Park Inn от Radisson Одинцово Москва 4* — Презентация возможностей (2026 год)</p>
+            </div>
+            
+            <div class="image-box">
+                <img src="hotel_main.jpg" alt="Интерьер отеля Park Inn Одинцово">
+            </div>
+            
+            <div class="alert-box">
+                <strong>ПОЧЕМУ ВЫБИРАЮТ НАС:</strong> Профессиональный сервис, гибкие пакеты услуг под любой формат, современные оборудованные залы и удобная транспортная доступность из Москвы.
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Профессиональный сервис <span class="badge">Сервис</span></h3>
+                    <p>Опытная команда обеспечит высокий уровень обслуживания вашего мероприятия</p>
+                </div>
+                <div class="card">
+                    <h3>Гибкие пакеты <span class="badge">Бюджет</span></h3>
+                    <p>Индивидуальные решения под любой формат и бюджет мероприятия</p>
+                </div>
+                <div class="card">
+                    <h3>Современные помещения <span class="badge">Оснащение</span></h3>
+                    <p>Залы с современным оборудованием и рассадкой под заказ</p>
+                </div>
+                <div class="card">
+                    <h3>Удобное расположение <span class="badge">Локация</span></h3>
+                    <p>Легкий доступ из Москвы, удобная транспортная доступность</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-location" class="dashboard-page">
+            <div class="page-header">
+                <h2>Расположение и Достопримечательности</h2>
+                <p>Адрес: 143000, ул. Маршала Неделина, д. 8, г. Одинцово, Московская область</p>
+            </div>
+            
+            <div class="image-box">
+                <img src="hotel_map.jpg" alt="Карта расположения отеля Park Inn Одинцово">
+            </div>
+            
+            <div class="card" style="margin-bottom: 30px;">
+                <h3>Описание локации</h3>
+                <p>Гости, приезжающие по делам или на отдых, оценят превосходное расположение отеля в самом центре города Одинцово с развитой инфраструктурой, удобной транспортной доступностью и живописным парком, расположенным прямо напротив отеля.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Транспортная доступность</h3>
+                    <ul class="styled-list">
+                        <li><span>Аэропорт Внуково</span> <span class="badge">14 км</span></li>
+                        <li><span>Аэропорт Домодедово</span> <span class="badge">65 км</span></li>
+                        <li><span>Аэропорт Шереметьево</span> <span class="badge">42 км</span></li>
+                        <li><span>Станция МЦД Одинцово</span> <span class="badge">2,8 км</span></li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Достопримечательности рядом</h3>
+                    <img src="attractions.jpg" alt="Достопримечательности" style="width:100%; border-radius:4px; margin-bottom:15px; border:1px solid #e2e8f0;">
+                    <ul class="styled-list">
+                        <li><span>Парк Патриот</span> <span class="badge">39 км</span></li>
+                        <li><span>Музей-заповедник Архангельское</span> <span class="badge">20 км</span></li>
+                        <li><span>Парк Победы на Поклонной горе</span> <span class="badge">18 км</span></li>
+                        <li><span>Государственный Дарвиновский Музей</span> <span class="badge">30 км</span></li>
+                        <li><span>Центральный Парк культуры и отдыха им. Горького</span> <span class="badge">27 км</span></li>
+                        <li><span>Большой Московский государственный цирк</span> <span class="badge">22 км</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-rooms" class="dashboard-page">
+            <div class="page-header">
+                <h2>Номерной фонд и Услуги</h2>
+                <p>Всего в отеле: 122 номера различных категорий, включая номер для гостей с ОВЗ. Отель имеет 9 этажей и панорамный вид на город.</p>
+            </div>
+
+            <div class="grid-3" style="margin-bottom: 30px;">
+                <div class="card" style="text-align: center;">
+                    <h3 style="justify-content: center; font-size: 24px; color: var(--color-gold); font-family: Georgia;">24 Часа</h3>
+                    <p>Рум-сервис и мини-бар: 24 часа</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="justify-content: center; font-size: 24px; color: var(--color-gold); font-family: Georgia;">24 Часа</h3>
+                    <p>Тренажерный зал: 24 часа</p>
+                </div>
+                <div class="card" style="text-align: center;">
+                    <h3 style="justify-content: center; font-size: 24px; color: var(--color-gold); font-family: Georgia;">Крытая</h3>
+                    <p>Круглосуточная парковка: Крытая, по специальной цене для гостей</p>
+                </div>
+            </div>
+
+            <div class="subtabs-container">
+                <div class="subtabs-nav">
+                    <button class="subtab-btn active" onclick="switchSubTab(this, 'room-std')">Стандарт (90)</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'room-jrs')">Полулюкс (18)</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'room-studio')">Студия (6)</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'room-fam')">Семейные апартаменты (5)</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'room-pan-jrs')">Полулюкс панорамный (1)</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'room-pan-snr')">Люкс панорамный (1)</button>
+                </div>
+
+                <div id="room-std" class="subtab-content" style="display: block;">
+                    <img src="room_standard.jpg" alt="Номер Стандарт" style="width:100%; max-height:350px; object-fit:cover; border-radius:4px; margin-bottom:20px; border:1px solid #c5a059;">
+                    <h3 style="margin-bottom: 12px; color: var(--color-gold);">СТАНДАРТ — 90 НОМЕРОВ | 20 кв.м.</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600; color: var(--text-muted);">Оснащение: Сейф, кондиционер, халаты, тапочки, мини-бар, рабочая зона, Wi-Fi, чайная станция, туалетные принадлежности</p>
+                    <p>Номера предлагают удобное пребывание для 1/2 гостей. Небольшие уютные номера, выполненные в теплых тонах, сразу располагают к приятному отдыху. Из окна открывается вид на парк и водоём.</p>
+                </div>
+
+                <div id="room-jrs" class="subtab-content">
+                    <img src="room_junior_suite.jpg" alt="Номер Полулюкс" style="width:100%; max-height:350px; object-fit:cover; border-radius:4px; margin-bottom:20px; border:1px solid #c5a059;">
+                    <h3 style="margin-bottom: 12px; color: var(--color-gold);">ПОЛУЛЮКС — 18 НОМЕРОВ | 30 кв.м.</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600; color: var(--text-muted);">Оснащение: Сейф, кондиционер, халаты, тапочки, mini-бар, рабочая зона, Wi-Fi, чайная станция, туалетные принадлежности</p>
+                    <p>Номера этой категории отличаются большей площадью, наличием зоны отдыха. Комфортные для длительного пребывания. Есть коннект с номерами Стандарт. Некоторые номера имеют перегородку от зоны отдыха.</p>
+                </div>
+
+                <div id="room-studio" class="subtab-content">
+                    <img src="room_studio.jpg" alt="Номер Студия" style="width:100%; max-height:350px; object-fit:cover; border-radius:4px; margin-bottom:20px; border:1px solid #c5a059;">
+                    <h3 style="margin-bottom: 12px; color: var(--color-gold);">СТУДИЯ — 6 НОМЕРОВ | 47,5 кв.м.</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600; color: var(--text-muted);">Оснащение: Мини-кухня, сейф, кондиционер, халаты, тапочки, мини-бар, рабочая зона, Wi-Fi, чайная станция, туалетные принадлежности</p>
+                    <p>Для тех, кто ищет больше комфорта, пространства и удобств, наш отель предлагает номер Студия. Просторная спальня, отдельная гостиная с диваном и мини-кухней для максимального удобства. Данная категория номеров идеально подходит для длительного проживания 1/2 гостей.</p>
+                </div>
+
+                <div id="room-fam" class="subtab-content">
+                    <img src="room_family.jpg" alt="Семейные Апартаменты" style="width:100%; max-height:350px; object-fit:cover; border-radius:4px; margin-bottom:20px; border:1px solid #c5a059;">
+                    <h3 style="margin-bottom: 12px; color: var(--color-gold);">СЕМЕЙНЫЕ АПАРТАМЕНТЫ — 5 НОМЕРОВ | 57 кв.м.</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600; color: var(--text-muted);">Оснащение: Мини-кухня, сейф, кондиционер, халаты, тапочки, мини-бар, рабочая зона, Wi-Fi чайная станция, туалетные принадлежности</p>
+                    <p>Номера данной категории идеально подходят для длительного проживания семей с детьми. В номерах есть две спальни, в одной из которых одна большая кровать, в другой две отдельные. Удобная для работы гостиная и просторная прихожая. В номерах представленной категории есть мини-кухня, а также столовая или гостиная зона на Ваш выбор.</p>
+                </div>
+
+                <div id="room-pan-jrs" class="subtab-content">
+                    <img src="room_panoramic_jrs.jpg" alt="Полулюкс с панорамным видом" style="width:100%; max-height:350px; object-fit:cover; border-radius:4px; margin-bottom:20px; border:1px solid #c5a059;">
+                    <h3 style="margin-bottom: 12px; color: var(--color-gold);">ПОЛУЛЮКС С ПАНОРАМНЫМ ВИДОМ — 1 НОМЕР | 46 кв.м.</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600; color: var(--text-muted);">Оснащение: Зона отдыха, сейф, кондиционер, халаты, тапочки, мини-бар, рабочая зона, Wi-Fi, кофейная станция, туалетные принадлежности</p>
+                    <p>Этот номер представлен в отеле в единственном экземпляре, он находится на девятом этаже. Из окон открывается потрясающий вид на центральную городскую площадь. Изюминкой этого номера является полукруглая форма и панорамное окно в душевой кабине.</p>
+                </div>
+
+                <div id="room-pan-snr" class="subtab-content">
+                    <img src="room_panoramic_suite.jpg" alt="Люкс с панорамным видом" style="width:100%; max-height:350px; object-fit:cover; border-radius:4px; margin-bottom:20px; border:1px solid #c5a059;">
+                    <h3 style="margin-bottom: 12px; color: var(--color-gold);">ЛЮКС С ПАНОРАМНЫМ ВИДОМ — 1 НОМЕР | 62 кв.м.</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600; color: var(--text-muted);">Оснащение: Спальня с камином, гостиная с обеденным столом, гардеробная, сейф, кондиционер, халаты, тапочки, мини-бар, рабочая зона, Wi-Fi, кофейная станция, туалетные принадлежности</p>
+                    <p>Данный номер представлен в единственном экземпляре, он находится на девятом этаже, соседствуя только лишь с номером категории Полулюкс с панорамным видом. Номер располагает к приятному отдыху в атмосфере роскоши и уюта. В номере есть камин, перед которым приятно расположиться в кресле и забыть о суете и делах.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-halls" class="dashboard-page">
+            <div class="page-header">
+                <h2>Конференц-залы и Вместимость</h2>
+                <p>Мы рады спланировать ваше мероприятие в Park Inn от Radisson Одинцово Москва</p>
+            </div>
+
+            <div class="grid-3" style="margin-bottom: 32px;">
+                <div class="card">
+                    <h3>Зал Берлин <span class="badge">74 кв.м.</span></h3>
+                    <p>Идельно подходит для семинаров и тренингов. Расположен на 2 этаже.</p>
+                </div>
+                <div class="card">
+                    <h3>Зал Нью-Йорк <span class="badge">172 кв.м.</span></h3>
+                    <p>Зал-трансформер. Площадь левой части - 100 кв.м., правой - 72 кв.м. Расположен на 2 этаже.</p>
+                </div>
+                <div class="card">
+                    <h3>VIP-переговорная <span class="badge">22 кв.м.</span></h3>
+                    <p>Отдельное пространство для приватных встреч и переговоров. Расположен на 9 этаже.</p>
+                </div>
+            </div>
+
+            <div class="image-box">
+                <img src="hall_berlin.jpg" alt="Залы для конференций Park Inn">
+            </div>
+
+            <h3 style="margin-bottom: 16px; color: var(--color-gold);">Table-вместимости и стоимости аренды площадок</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Зал / Площадка</th>
+                            <th>Кв.м.</th>
+                            <th>Банкет</th>
+                            <th>Театр</th>
+                            <th>П-Рассадка / Круглый стол</th>
+                            <th>Класс</th>
+                            <th>Полдня (4 часа, руб)</th>
+                            <th>Целый день (8 часов, руб)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Нью-Йорк</strong></td><td>172</td><td>100</td><td>150</td><td>60</td><td>80</td><td>55 000</td><td>85 000</td></tr>
+                        <tr><td><strong>Берлин</strong></td><td>74</td><td>50</td><td>75</td><td>30</td><td>45</td><td>50 000</td><td>70 000</td></tr>
+                        <tr><td><strong>Переговорная комната VIP</strong></td><td>22</td><td>-</td><td>-</td><td>8</td><td>-</td><td>20 000</td><td>-</td></tr>
+                        <tr><td><strong>Зал ресторана «Лерой»</strong></td><td>225</td><td>120</td><td>-</td><td>-</td><td>-</td><td>-</td><td>150 000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="alert-box">
+                <strong>При проведении мероприятий в стоимость аренды зала входит:</strong> экран, проектор, флипчарт, 1 блок бумаги для флипчарта, 1 комплект маркеров, питьевая вода 2 бут. (0,5 л.) на чел., комплект блокнот + ручка на чел., кликер.
+            </div>
+
+            <div class="card">
+                <h3 style="color: #051329;">Оснащение и планировка залов (Венеция / Локация 2 этаж): Лифт, лобби 2 этажа, Берлин, Нью-Йорк 1, Нью-Йорк 2</h3>
+                <img src="hall_equipment.jpg" alt="Оснащение залов" style="width:100%; max-height:250px; object-fit:cover; border-radius:4px; margin-bottom:20px; border:1px solid #e2e8f0;">
+                <p style="font-size: 14px; line-height: 1.8; color: #334155; font-family: sans-serif;">
+                    • Проектор с пультом управления<br>
+                    • Цифровая система управления с выводом изображения на проектор, возможность подключения внешних источников трансляции по порту HDMI и VGA<br>
+                    • Моторизованный автоматический экран для проектора (2*3 м.), кликер<br>
+                    • Система звукоусиления, встроенные потолочные динамики для равномерной трансляции по всей площади зала<br>
+                    • Беспроводные микрофоны<br>
+                    • Светодиодное освещение<br>
+                    • Розетки бытовые и силовые<br>
+                    • Приточно-вытяжная вентиляция (обогрев и охлаждение)<br>
+                    • Кондиционер<br>
+                    • Флипчарт<br>
+                    • Wi-Fi
+                </p>
+            </div>
+        </div>
+
+        <div id="page-catering" class="dashboard-page">
+            <div class="page-header">
+                <h2>Кейтеринг для мероприятий</h2>
+                <p>Кофе-брейки: Разнообразные пакеты от 450 руб/чел с напитками и закусками. Сет меню: Готовые меню от 1800 руб/чел. Шведский стол: Полноценное меню обеда или ужина для деловых мероприятий от 2300 руб/чел. Банкет: Разработка под Ваш запрос по матрице меню. Индивидуальное меню под ваши предпочтения и бюджет.</p>
+            </div>
+
+            <div class="subtabs-container">
+                <div class="subtabs-nav">
+                    <button class="subtab-btn active" onclick="switchSubTab(this, 'cb-menu')">Кофе-брейки</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'set-1800')">Сет 1800</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'set-2250')">Сет 2250</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'buffet-std')">Шведский стол 2300</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'buffet-biz')">Шведский стол 3000</button>
+                    <button class="subtab-btn" onclick="switchSubTab(this, 'buffet-prem')">Шведский стол 5000</button>
+                </div>
+
+                <div id="cb-menu" class="subtab-content" style="display: block;">
+                    <div class="grid-2">
+                        <div class="card">
+                            <h3>№1 Приветственный <span class="badge">450 РУБ/ЧЕЛ</span></h3>
+                            <p style="margin-bottom: 8px;"><strong>Еда:</strong> Бискотти с миндалем, Датская выпечка</p>
+                            <p style="color: var(--text-muted); font-size: 13px;"><strong>Напитки:</strong> Кофе, чай, лимон, молоко, сахар, сливки</p>
+                        </div>
+                        <div class="card">
+                            <h3>№2 Нон-стоп <span class="badge">650 РУБ/ЧЕЛ</span></h3>
+                            <p style="margin-bottom: 8px;"><strong>Еда:</strong> Ассорти печенья (3 вида)</p>
+                            <p style="color: var(--text-muted); font-size: 13px;"><strong>Напитки:</strong> Кофе, чай, лимон, молоко, сахар, сливки</p>
+                        </div>
+                        
+                        <div class="image-box" style="grid-column: span 2; margin: 15px 0;">
+                            <img src="catering_page_16.jpg" alt="Презентация кофе-брейков">
+                        </div>
+
+                        <div class="card">
+                            <h3>№3 Классический <span class="badge">750 РУБ/ЧЕЛ</span></h3>
+                            <p style="margin-bottom: 8px;"><strong>Еда:</strong> Брускетта с ростбифом, сладкой горчицей и маринованным огурчиком; Финиковый мини-кекс с грецким орехом и корицей; Эклер с заварным кремом и белым шоколадом</p>
+                            <p style="margin-bottom: 8px;"><strong>Фрукты:</strong> Нарезка сезонного фрукта</p>
+                            <p style="color: var(--text-muted); font-size: 13px;"><strong>Напитки:</strong> Кофе, чай, лимон, молоко, сахар, сливки</p>
+                        </div>
+                        <div class="card">
+                            <h3>№4 Бизнес <span class="badge">950 РУБ/ЧЕЛ</span></h3>
+                            <p style="margin-bottom: 8px;"><strong>Еда:</strong> Бургер мини с куриным филе Су-вид; Круассан мини с лососем и творожным кремом и свежим огурцом; Финансье с фисташками и белым шоколадом</p>
+                            <p style="margin-bottom: 8px;"><strong>Фрукты:</strong> Нарезка сезонного фрукта</p>
+                            <p style="color: var(--text-muted); font-size: 13px;"><strong>Напитки:</strong> Кофе, чай, лимон, молоко, sugar, сливки</p>
+                        </div>
+
+                        <div class="image-box" style="grid-column: span 2; margin: 15px 0;">
+                            <img src="catering_page_17.jpg" alt="Фуршетный стол">
+                        </div>
+
+                        <div class="card">
+                            <h3>№5 Вип <span class="badge">1250 РУБ/ЧЕЛ</span></h3>
+                            <p style="margin-bottom: 8px;"><strong>Еда:</strong> Сэндвич с окороком, трюфельным маслом и рукколой; Брускетта с лососем, муссом из авокадо и перепелиным яйцом; Апельсиновый фондан; Классический тирамису</p>
+                            <p style="margin-bottom: 8px;"><strong>Фрукты:</strong> Нарезка сезонного фрукта</p>
+                            <p style="color: var(--text-muted); font-size: 13px;"><strong>Напитки:</strong> Кофе, чай, лимон, молоко, сахар, сливки</p>
+                        </div>
+                        <div class="card">
+                            <h3>№6 Здоровый <span class="badge">1050 РУБ/ЧЕЛ</span></h3>
+                            <p style="margin-bottom: 8px;"><strong>Еда:</strong> Кокосовый мусс с тропическими фруктами; Чиа с протертой ягодой и голубикой; Ржаной хлебец с лососем, рваным сыром и кабачком гриль</p>
+                            <p style="margin-bottom: 8px;"><strong>Фрукты:</strong> Нарезка сезонного фрукта</p>
+                            <p style="color: var(--text-muted); font-size: 13px;"><strong>Напитки:</strong> Сок свежевыжатый (апельсин/грейпфрут), Кофе, чай, лимон, молоко, сахар, сливки</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="set-1800" class="subtab-content">
+                    <div class="image-box" style="margin-bottom: 20px;">
+                        <img src="catering_page_19.jpg" alt="Итальянская лазанья Болоньезе">
+                    </div>
+                    <h3 style="margin-bottom: 16px; color: var(--color-gold);">СЕТ-МЕНЮ ДО 30 ТИ ПЕРСОН — 1800 РУБ/ЧЕЛ</h3>
+                    <div class="menu-section">
+                        <div class="menu-title">Горячее блюдо (на выбор)</div>
+                        <div class="menu-items">
+                            • Филе речного белого судака, запечённое в ассорти красных специй, с овощным Рататуем и соусом Ранч<br>
+                            • Классическая итальянская лазанья Болоньезе с фаршем из мраморной говядины и твёрдым сыром Грано Подано<br>
+                            • Свиная корейка на косточке, приготовленная на углях с запечённым поволжским картофелем и пикантным перечным соусом в авторской подаче<br>
+                            • Гуляш из телятины с картофельным пюре с овощами<br>
+                            • Куриное филе с прошутто, стручковой фасолью, томатами и соусом Деми-гляссе<br>
+                            • Запеченные рыбные биточки с кус-кус и овощами с лимонным соусом
+                        </div>
+                    </div>
+                    <div class="menu-section">
+                        <div class="menu-title">Салат (на выбор)</div>
+                        <div class="menu-items">
+                            • Классический Греческий салат с сербской брынзой<br>
+                            • Родопи с куриной грудкой гриль, хрустящими огурчиками, итальянскими гренками, салатом айсберг и пикантной горчичной заправкой<br>
+                            • Салат с кальмаром, битыми огурцами и соусом Айоли<br>
+                            • Классический Оливье с копчёным филе утки Магре<br>
+                            • Салат с ростбифом, жареным луком и салатом айсберг<br>
+                            • Филе тунца с китайским салатом и медово-горчичной заправкой
+                        </div>
+                    </div>
+                    <div class="menu-section">
+                        <div class="menu-title">Дополнительно: Суп дня или десерт от Шеф-повара</div>
+                    </div>
+                    <div class="menu-section">
+                        <div class="menu-title">Напитки (на выбор)</div>
+                        <div class="menu-items">
+                            <strong>Холодный:</strong> Сок (апельсиновый/яблочный), Морс (облепиховый/клюквенный), Вода бутилированная 0.5 (с газом/без газа)<br>
+                            <strong>Горячий:</strong> Чай (зелёный/чёрный), Кофе (американо/эспрессо/капучино)
+                        </div>
+                    </div>
+                </div>
+
+                <div id="set-2250" class="subtab-content">
+                    <div class="image-box" style="margin-bottom: 20px;">
+                        <img src="catering_page_20.jpg" alt="Салат с запеченной рыбой и киноа">
+                    </div>
+                    <h3 style="margin-bottom: 16px; color: var(--color-gold);">СЕТ-МЕНЮ ДО 30 ТИ ПЕРСОН — 2250 РУБ/ЧЕЛ</h3>
+                    <div class="menu-section">
+                        <div class="menu-title">Горячее блюдо (на выбор)</div>
+                        <div class="menu-items">
+                            • Филе красного морского окуня, запечённое в пряных травах - подаётся с картофелем бэби и соусом Белое вино с шафраном<br>
+                            • Говяжьи медальоны, томлённые с черносливом в перечном соусе и ароматным рисом Пилау<br>
+                            • Классический бефстроганов с картофельным пюре и соленым огурчиком<br>
+                            • Стейк из свиной шейки с картофельным гратеном и соусом деми-гляссе с хреном<br>
+                            • Филе Атлантической трески со свекольной пастой Орзо, творожным сыром и лимоном<br>
+                            • Кордон Блю куриная грудка, фаршированная вестфальской ветчиной с красным сыром чеддер, панированная в сухарях Панко с воздушным картофельным пюре
+                        </div>
+                    </div>
+                    <div class="menu-section">
+                        <div class="menu-title">Салат (на выбор)</div>
+                        <div class="menu-items">
+                            • Салат с ростбифом, со свежими овощами и сыром чеддер<br>
+                            • Итальянский салат Капрезе из дуэта томатов и сыра Моцарелла Гальбани с базиликовым соусом Песто<br>
+                            • Салат с хрустящим баклажаном, бакинскими томатами в кисло-сладкой заправке и сырной стружкой<br>
+                            • Цезарь с куриной грудкой гриль в авторской подаче<br>
+                            • Салат с запеченной горбушей, грейпфрутом, отварным киноа и сыром дор-блю
+                        </div>
+                    </div>
+                    <div class="menu-section">
+                        <div class="menu-title">Дополнительно: Суп дня или десерт от Шеф-повара</div>
+                    </div>
+                    <div class="menu-section">
+                        <div class="menu-title">Напитки (на выбор)</div>
+                        <div class="menu-items">
+                            <strong>Холодный:</strong> Сок (апельсиновый/яблочный), Морс (облепиховый/клюквенный), Вода бутилированная 0.5 ( с газом/без газа)<br>
+                            <strong>Горячий:</strong> Чай (зелёный/чёрный), Кофе (американо/эспрессо/капучино)
+                        </div>
+                    </div>
+                </div>
+
+                <div id="buffet-std" class="subtab-content">
+                    <div class="image-box" style="margin-bottom: 20px;">
+                        <img src="buffet_2300.jpg" alt="Шведский стол тариф Стандарт">
+                    </div>
+                    
+                    <div class="menu-section" style="background: #f8fafc; padding: 20px; border-radius: 4px; color: var(--text-dark); margin-bottom: 20px;">
+                        <h4 style="color: var(--bg-main); margin-bottom: 10px; border-bottom: 2px solid var(--color-gold); padding-bottom: 4px;">МЕНЮ ШВЕДСКИЙ СТОЛ №1 — 2 300 РУБ/ЧЕЛ (от 30 персон)</h4>
+                        <p style="margin-bottom: 8px;"><strong>Холодные закуски и салаты:</strong> Фирменный салат с ростбифом и сыром чеддер; Винегрет из запеченных овощей с горчичной заправкой; Два вида сыра в нарезке (чеддер, тильзитер); Мясная нарезка (колбаса с/к, ветчина в/к)</p>
+                        <p style="margin-bottom: 8px;"><strong>Супы:</strong> Крем-суп Грибной с чесночными гренками; Лапша куриная с домашней курицей и зеленью</p>
+                        <p style="margin-bottom: 8px;"><strong>Горячие блюда:</strong> Рыбные биточки с шафраном и лимонным соусом; Шашлык куриный с лавашом и домашней аджикой; Итальянский Болоньезе с томатами и сыром пармезан</p>
+                        <p style="margin-bottom: 8px;"><strong>Гарниры:</strong> Паста Пенне с оливковым маслом; Картофель запеченный с паприкой и чесноком; Рис Пилау с овощами</p>
+                        <p><strong>Десерты:</strong> Пирожное Фисташковое с малиной; Пирожное Морковное. Хлеб (булочки белая и черная) 2 шт.</p>
+                    </div>
+
+                    <div class="menu-section" style="background: #f8fafc; padding: 20px; border-radius: 4px; color: var(--text-dark); margin-bottom: 20px;">
+                        <h4 style="color: var(--bg-main); margin-bottom: 10px; border-bottom: 2px solid var(--color-gold); padding-bottom: 4px;">МЕНЮ ШВЕДСКИЙ СТОЛ №2 — 2 300 РУБ/ЧЕЛ (от 30 персон)</h4>
+                        <p style="margin-bottom: 8px;"><strong>Холодные закуски и салаты:</strong> Салат Нагал, приготовленный на углях; Салат Мимоза с запеченной горбушей и сыром эдам; Два вида сыра в нарезке (чеддер, тильзитер); Мясная нарезка (колбаса с/к, ветчина в/к)</p>
+                        <p style="margin-bottom: 8px;"><strong>Супы:</strong> Суп крем овощной с гренками; Рассольник с бочковыми огурчиками и сметаной</p>
+                        <p style="margin-bottom: 8px;"><strong>Горячие блюда:</strong> Гуляш из говядины с овощами и зеленью; Куриные котлеты из рубленого фарша с грибным соусом; Жюльен из морепродуктов в сливочном соусе</p>
+                        <p style="margin-bottom: 8px;"><strong>Гарниры:</strong> Картофель отварной с маслом и зеленью; Овощной рататуй с прованскими травами и томатами</p>
+                        <p><strong>Десерты:</strong> Пирожное Сметанник; Пирожное Карамельно-ореховое. Хлеб (булочки белая и черная) 2 шт.</p>
+                    </div>
+
+                    <div class="menu-section" style="background: #f8fafc; padding: 20px; border-radius: 4px; color: var(--text-dark); margin-bottom: 20px;">
+                        <h4 style="color: var(--bg-main); margin-bottom: 10px; border-bottom: 2px solid var(--color-gold); padding-bottom: 4px;">МЕНЮ ШВЕДСКИЙ СТОЛ №3 — 2 300 РУБ/ЧЕЛ (от 30 персон)</h4>
+                        <p style="margin-bottom: 8px;"><strong>Холодные закуски и салаты:</strong> Салат Деревенский с редисом, бакинскими огурчиками и домашним майонезом; Салат с бужениной, печеными овощами и кинзой; Два вида сыра в нарезке (чеддер, тильзитер); Мясная нарезка (колбаса с/к, ветчина в/к)</p>
+                        <p style="margin-bottom: 8px;"><strong>Супы:</strong> Тыквенный крем суп с пшеничными гренками; Солянка мясная с копченостями со сметаной</p>
+                        <p style="margin-bottom: 8px;"><strong>Горячие блюда:</strong> Рыбные котлетки с соусом Велюте; Азу по-татарски с маринованными огурчиками и протертыми томатами; Филе куриное Су-вид, приготовленное на углях с травами и специями</p>
+                        <p style="margin-bottom: 8px;"><strong>Гарниры:</strong> Гречка отварная с луком, грибами и зеленью; Паровой рис Басмати с ароматными специями; Картофельное пюре</p>
+                        <p><strong>Десерты:</strong> Пирожное Медовик; Пирожное Брауни. Хлеб (булочки белая и черная) 2 шт.</p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border: 1px dashed var(--color-gold); border-radius: 4px; font-family: sans-serif; font-size: 14px;">
+                        <h5 style="color: var(--color-gold); margin-bottom: 10px; text-transform: uppercase;">Входят в стоимость каждого сета Шведского стола 1-6:</h5>
+                        <p style="margin-bottom: 8px;"><strong>Салат бар:</strong> Огурцы свежие / Помидоры свежие / Перец болгарский / Редис / Морковь / Стебель сельдерея / Mitс салат / Маслины / Оливки / Лук жемчужный / Корнишоны / Зелень свежая / Лук крымский / Капуста квашеная</p>
+                        <p style="margin-bottom: 8px;"><strong>Соусы к холодным блюдам:</strong> Кетчуп / Майонез / Соевый соус / Соус Чили Свит / Соус тар-тар / Бальзамический уксус / Масло оливковое / Горчица дижонская / Сливочный хрен</p>
+                        <p><strong>Напитки (Сеты 1-6):</strong> Сок пакетированный (яблочный/апельсиновый), Вода с лимоном, Чай фирменный, Кофе зерновой, Молоко, Лимон, Сахар</p>
+                    </div>
+                </div>
+
+                <div id="buffet-biz" class="subtab-content">
+                    <div class="image-box" style="margin-bottom: 20px;">
+                        <img src="buffet_3000.jpg" alt="Шведский стол тариф Бизнес">
+                    </div>
+
+                    <div class="menu-section" style="background: #f8fafc; padding: 20px; border-radius: 4px; color: var(--text-dark); margin-bottom: 20px;">
+                        <h4 style="color: var(--bg-main); margin-bottom: 10px; border-bottom: 2px solid var(--color-gold); padding-bottom: 4px;">МЕНЮ ШВЕДСКИЙ СТОЛ №4 — 3 000 РУБ/ЧЕЛ (от 30 персон)</h4>
+                        <p style="margin-bottom: 8px;"><strong>Холодные закуски и салаты:</strong> Салат Нисуаз с кенийской фасолью и малиновой заправкой; Салат Цезарь с куриной грудкой Су-вид и сыром Пармезан; Зеленый салат в апельсиновой заправке с семечками; Ассорти соленой и копченой рыбы (сельдь, масленая, горбуша с/с); Три вида сыра в нарезке (чеддер, тильзитер, дор-блю); Мясная нарезка (колбаса с/к, ветчина в/к, ростбиф)</p>
+                        <p style="margin-bottom: 8px;"><strong>Супы:</strong> Норвежская сливочная уха с красной рыбой и зеленью; Щи из свежей капусты с телятиной со сметаной</p>
+                        <p style="margin-bottom: 8px;"><strong>Горячие блюда:</strong> Куриные биточки с соусом деми-гляссе и травами; Бефстроганов из говядины с грибами и сливочным соусом; Запеченная треска с прованскими травами и ароматным маслом</p>
+                        <p style="margin-bottom: 8px;"><strong>Гарниры:</strong> Картофельный Гратен с сыром моцарелла и мускатным орехом; Овощи гриль, приготовленные на углях с тимьяном и розмарином; Булгур с запеченными овощами и травами</p>
+                        <p><strong>Десерты:</strong> Пирожное Красный бархат; Апельсиновый fontan в сиропе. Хлеб (булочки белая и черная) 2 шт.</p>
+                    </div>
+
+                    <div class="menu-section" style="background: #f8fafc; padding: 20px; border-radius: 4px; color: var(--text-dark); margin-bottom: 20px;">
+                        <h4 style="color: var(--bg-main); margin-bottom: 10px; border-bottom: 2px solid var(--color-gold); padding-bottom: 4px;">МЕНЮ ШВЕДСКИЙ СТОЛ №5 — 3 000 РУБ/ЧЕЛ (от 30 персон)</h4>
+                        <p style="margin-bottom: 8px;"><strong>Холодные закуски и салаты:</strong> Салат Греческий с сыром фета, черными маслинами и лимонной заправкой; Салат с командорским кальмаром и заправкой на основе коньяка; Салат Лион с беконом, куриной грудкой и хлебными чипсами; Ассорти соленой и копченой рыбы (сельдь, масленая, горбуша с/с); Три вида сыра в нарезке (чеддер, тильзитер, дор-блю); Мясная нарезка (колбаса с/к, ветчина в/к, ростбиф)</p>
+                        <p style="margin-bottom: 8px;"><strong>Супы:</strong> Минестроне овощной с брокколи и соусом песто; Харчо на бараньих косточках с томатами и рисом</p>
+                        <p style="margin-bottom: 8px;"><strong>Горячие блюда:</strong> Куриная грудка в беконе с соусом песто с травами; Гуляш Венгерский с паприкой и беконом; Филе Судака, томленное в собственном соку с травами</p>
+                        <p style="margin-bottom: 8px;"><strong>Гарниры:</strong> Спагетти из твердых сортов с оливковым маслом; Зеленая стручковая фасоль с томатами и черными маслинами; Кус-кус с зеленым кабачком и болгарским перцем</p>
+                        <p><strong>Десерты:</strong> Пирожное Медовик; Крем-брюле на сливках. Хлеб (булочки белая и черная) 2 шт.</p>
+                    </div>
+
+                    <div class="menu-section" style="background: #f8fafc; padding: 20px; border-radius: 4px; color: var(--text-dark); margin-bottom: 20px;">
+                        <h4 style="color: var(--bg-main); margin-bottom: 10px; border-bottom: 2px solid var(--color-gold); padding-bottom: 4px;">МЕНЮ ШВЕДСКИЙ СТОЛ №6 — 3 000 РУБ/ЧЕЛ (от 30 персон)</h4>
+                        <p style="margin-bottom: 8px;"><strong>Холодные закуски и салаты:</strong> Салат Цезарь с морепродуктами и сыром Пармезан; Итальянский салат Капрезе с соусом песто и рукколой; Салат Оливье с вестфальской ветчиной и бочковыми огурчиками; Ассорти соленой и копченой рыбы (сельдь, масленая, горбуша с/с); Три вида сыра в нарезке (чеддер, тильзитер, дор-блю); Мясная нарезка (колбаса с/к, ветчина в/к, ростбиф)</p>
+                        <p style="margin-bottom: 8px;"><strong>Супы:</strong> Борщ на говяжьей косточке со сметаной; Тайский суп Том-ям с морепродуктами и рисом</p>
+                        <p style="margin-bottom: 8px;"><strong>Горячие блюда:</strong> Чахохбили из курицы с томатами с кавказскими специями и травами; Котлеты из рубленой говядины со сливочным Ткемали; Филе красного окуня с оливками и помидорами черри с розмарином</p>
+                        <p style="margin-bottom: 8px;"><strong>Гарниры:</strong> Картогель черри Паризьен, запеченный на углях; Овощное соте из овощей с томатами и итальянскими травами; Спагетти отварные с соусом из базилика и сливок</p>
+                        <p><strong>Десерты:</strong> Пирожное Шоколадное; Штрудель грушевый с орехами и сухофруктами. Хлеб (булочки белая и черная) 2 шт.</p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border: 1px dashed var(--color-gold); border-radius: 4px; font-family: sans-serif; font-size: 14px;">
+                        <h5 style="color: var(--color-gold); margin-bottom: 10px; text-transform: uppercase;">Входят в стоимость каждого сета Шведского стола 1-6:</h5>
+                        <p style="margin-bottom: 8px;"><strong>Салат бар:</strong> Огурцы свежие / Помидоры свежие / Перец болгарский / Редис / Морковь / Стебель сельдерея / Микс салат / Маслины / Оливки / Лук жемчужный / Корнишоны / Зелень свежая / Лук крымский / Капуста квашеная</p>
+                        <p style="margin-bottom: 8px;"><strong>Соусы к холодным блюдам:</strong> Кетчуп / Майонез / Соевый соус / Соус Чили Свит / Соус тар-тар / Бальзамический уксус / Масло оливковое / Горчица дижонская / Сливочный хрен</p>
+                        <p><strong>Напитки (Сеты 1-6):</strong> Сок пакетированный (яблочный/апельсиновый), Вода с лимоном, Чай фирменный, Кофе зерновой, Молоко, Лимон, Сахар</p>
+                    </div>
+                </div>
+
+                <div id="buffet-prem" class="subtab-content">
+                    <div class="image-box" style="margin-bottom: 20px;">
+                        <img src="buffet_5000.jpg" alt="Шведский стол тариф Премиум">
+                    </div>
+
+                    <div class="menu-section" style="background: #f8fafc; padding: 25px; border-radius: 4px; color: var(--text-dark);">
+                        <h4 style="color: var(--bg-main); margin-bottom: 15px; border-bottom: 2px solid var(--color-gold); padding-bottom: 6px;">МЕНЮ ШВЕДСКИЙ СТОЛ №7 (от 30-ти персон) — 5 000 РУБ/ЧЕЛ</h4>
+                        <p style="margin-bottom: 12px; line-height: 1.6;"><strong>Холодные закуски и салаты:</strong> Салат из говяжьей вырезки со свежими овощами и бальзамической заправкой; Салат с морепродуктами; Анти пасти; Ассорти копченой рыбы (угорь, масленая, семга); Три вида сыра в нарезке (чеддер, тильзитер, дор-блю); Мясная нарезка (колбаса с/к, шейка в/к, ростбиф)</p>
+                        <p style="margin-bottom: 12px; padding: 12px; background: rgba(197,160,89,0.1); border-left: 4px solid var(--color-gold); line-height: 1.6;"><strong>Карвинг-станция:</strong> На выбор: индейка, утка, говядина (стейк Чак-ролл). Соус перечный, брусничный</p>
+                        <p style="margin-bottom: 12px; line-height: 1.6;"><strong>Супы:</strong> Томатный суп Ля-море с морепродуктами; Борщ с утиным мясом со сметаной</p>
+                        <p style="margin-bottom: 12px; line-height: 1.6;"><strong>Горячие блюда:</strong> Люля из курицы Josper с лавашом и домашней аджикой; Фиш ролл из речной форели с овощами</p>
+                        <p style="margin-bottom: 12px; line-height: 1.6;"><strong>Гарниры:</strong> Брокколи гриль с морской солью; Ассорти из трех видов риса</p>
+                        <p style="margin-bottom: 16px; line-height: 1.6;"><strong>Десерты:</strong> Кокосовый мусс с тропическим чатни; Баскский чизкейк; Фруктовая нарезка (ананас, киви, апельсин, виноград, клубника). Хлеб (булочки белая и черная) 2 шт.</p>
+                        
+                        <div style="background: #ffffff; padding: 15px; border: 1px dashed #cbd5e1; border-radius: 4px; font-size: 13px; color: #475569;">
+                            <h5 style="color: var(--bg-main); margin-bottom: 8px; font-weight: bold; text-transform: uppercase;">Входят в стоимость данного сета:</h5>
+                            <p style="margin-bottom: 6px;"><strong>Салат бар:</strong> Огурцы свежие / Помидоры свежие / Перец болгарский / Редис / Морковь / Стебель сельдерея / Микс салат / Маслины / Оливки / Лук жемчужный / Корнишоны / Зелень свежая / Лук крымский / Капуста квашеная</p>
+                            <p style="margin-bottom: 6px;"><strong>Соусы к холодным блюдам:</strong> Кетчуп / Майонез / Соевый соус / Соус Чили Свит / Соус тар-тар / Бальзамический уксус / Масло оливковое / Горчица дижонская / Сливочный хрен</p>
+                            <p><strong>Напитки Премиум (Сет 7):</strong> Лимонад цитрусовый домашний, Вода с лимоном, Чай фирменный, Кофе зерновой, Молоко, Лимон, Сахар</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-options" class="dashboard-page">
+            <div class="page-header">
+                <h2>Дополнительные опции меню (Поштучно)</h2>
+                <p>Дополнительные блюда и закуски к вашему мероприятию по индивидуальной матрице цен.</p>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Категория</th>
+                            <th>Наименование блюда</th>
+                            <th>Стоимость (руб.)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td rowspan="11" style="font-weight: bold; color: #051329; font-family: Georgia;">Основные опции</td><td>Брускетта с зеленым кабачком и сыром страчателла</td><td>250,00 руб.</td></tr>
+                        <tr><td>Брускетта с лососем и свежим огурцом</td><td>400,00 руб.</td></tr>
+                        <tr><td>Брускетта с ростбифом, сладкой горчицей и маринованным огурчиком</td><td>350,00 руб.</td></tr>
+                        <tr><td>Бургер мини с куриным филе Су-вид</td><td>250,00 руб.</td></tr>
+                        <tr><td>Круассан мини с лососем и творожным кремом и свежим огурцом</td><td>300,00 руб.</td></tr>
+                        <tr><td>Мини сэндвич с курицей и беконом</td><td>250,00 руб.</td></tr>
+                        <tr><td>Мини блинчики с семгой и сливочным кремом</td><td>300,00 руб.</td></tr>
+                        <tr><td>Ролл с ростбифом и соусом деми-гляссе</td><td>350,00 руб.</td></tr>
+                        <tr><td>Цезарь ролл с куриной грудкой</td><td>250,00 руб.</td></tr>
+                        <tr><td>Сэндвич с окороком, трюфельным маслом и рукколой</td><td>300,00 руб.</td></tr>
+                        <tr><td>Ржаной хлебец с лососем, рваным сыром и кабачком гриль</td><td>400,00 руб.</td></tr>
+                        
+                        <tr><td rowspan="3" style="font-weight: bold; color: #051329; font-family: Georgia;">Канапе</td><td>Моцарелла с томатами и соусом Песто</td><td>200,00 руб.</td></tr>
+                        <tr><td>Канапе фруктовое (ананас, киви, виноград)</td><td>150,00 руб.</td></tr>
+                        <tr><td>Тунец с апельсином</td><td>200,00 руб.</td></tr>
+                        
+                        <tr><td rowspan="10" style="font-weight: bold; color: #051329; font-family: Georgia;">Десерты</td><td>Чиа с протертой ягодой и голубикой</td><td>250,00 руб.</td></tr>
+                        <tr><td>Мусс (на выбор: клубника/манго/шоколад)</td><td>200,00 руб.</td></tr>
+                        <tr><td>Кокосовый мусс с тропическими фруктами</td><td>300,00 руб.</td></tr>
+                        <tr><td>Финансье с фисташками и белым шоколадом</td><td>300,00 руб.</td></tr>
+                        <tr><td>Финиковый мини кекс с грецким орехом и корицей</td><td>200,00 руб.</td></tr>
+                        <tr><td>Апельсиновый фондан</td><td>250,00 руб.</td></tr>
+                        <tr><td>Эклер с заварным кремом и белым шоколадом</td><td>250,00 руб.</td></tr>
+                        <tr><td>Датская выпечка в ассортименте</td><td>200,00 руб.</td></tr>
+                        <tr><td>Пирожное Медовик</td><td>250,00 руб.</td></tr>
+                        <tr><td>Пирожное Чизкейк</td><td>250,00 руб.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchPage(pageId, btnElement) {
+            var pages = document.querySelectorAll('.dashboard-page');
+            for (var i = 0; i < pages.length; i++) {
+                pages[i].style.display = 'none';
+            }
+            
+            var targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.style.display = 'block';
+            }
+
+            var buttons = document.querySelectorAll('.nav-menu .nav-btn');
+            for (var j = 0; j < buttons.length; j++) {
+                buttons[j].classList.remove('active');
+            }
+            
+            if (btnElement) {
+                btnElement.classList.add('active');
+                if (window.innerWidth <= 768) {
+                    btnElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            }
+        }
+
+        function switchSubTab(buttonElement, targetTabId) {
+            var container = buttonElement.closest('.subtabs-container');
+            if (!container) return;
+            
+            var btns = container.querySelectorAll('.subtab-btn');
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove('active');
+            }
+            
+            var contents = container.querySelectorAll('.subtab-content');
+            for (var j = 0; j < contents.length; j++) {
+                contents[j].style.display = 'none';
+            }
+
+            buttonElement.classList.add('active');
+            var targetContent = document.getElementById(targetTabId);
+            if (targetContent) {
+                targetContent.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
